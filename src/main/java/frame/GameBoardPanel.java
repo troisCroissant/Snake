@@ -18,7 +18,7 @@ public class GameBoardPanel extends JPanel {
 		setSize(500, 500);
 	}
 
-	/*Singleton-Pattern ensures only one instance is up and running*/
+	/* Singleton-Pattern ensures only one instance is up and running*/
 	private static GameBoardPanel gameBoardPanel;
 
 	public static GameBoardPanel getInstance() {

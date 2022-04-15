@@ -6,19 +6,19 @@ import src.main.java.logic.Game;
 import javax.swing.*;
 import java.awt.*;
 
-public class MenuePanel extends JPanel {
+public class MenuPanel extends JPanel {
 
-	private static MenuePanel menuePanel;
+	private static MenuPanel menuPanel;
 	private JButton startButton = new JButton("Start");
 	private JButton aiButton;
 
 
-	public static MenuePanel getInstance() {
-		if(MenuePanel.menuePanel == null) menuePanel = new MenuePanel();
-		return menuePanel;
+	public static MenuPanel getInstance() {
+		if(MenuPanel.menuPanel == null) menuPanel = new MenuPanel();
+		return menuPanel;
 	}
 
-	private MenuePanel() {
+	private MenuPanel() {
 		setSize(500,50);
 		setLayout(new GridLayout(2, 2, 0, 0));
 

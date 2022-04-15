@@ -1,7 +1,7 @@
 package src.main.java.logic;
 
 import src.main.java.frame.GameBoardPanel;
-import src.main.java.frame.MenuePanel;
+import src.main.java.frame.MenuPanel;
 import src.main.java.frame.OverViewPanel;
 
 import java.awt.*;
@@ -14,7 +14,7 @@ public class Game {
 
     private static Game game;
     private Rectangle item = new Rectangle();
-    private MenuePanel menue = MenuePanel.getInstance();
+    private MenuPanel menue = MenuPanel.getInstance();
     private OverViewPanel overview = OverViewPanel.getInstance();
     private GameBoardPanel gameboard = GameBoardPanel.getInstance();
     private Snake snake = Snake.getInstance();

@@ -1,5 +1,6 @@
 package src.main.java.logic;
 
+import src.main.java.configuration.Configs;
 import src.main.java.frame.GameBoardPanel;
 import src.main.java.frame.MenuPanel;
 import src.main.java.frame.OverViewPanel;
@@ -18,13 +19,14 @@ public class Game {
     private OverViewPanel overview = OverViewPanel.getInstance();
     private GameBoardPanel gameboard = GameBoardPanel.getInstance();
     private Snake snake = Snake.getInstance();
+    private Configs configs = Configs.getInstance();
 
     private ArrayList<Rectangle> temporarysafer = new ArrayList<Rectangle>();
     Map<Character, Integer> newHeadposition = new HashMap<Character, Integer>();
 
     private boolean gameRunning = true;
     private char direction = ' ';
-    private int speed = 50;
+    private int speed = configs.getSpeed();
     private int score = 1;
     private boolean add = false;
     private boolean directionChangeBlocked = false;
@@ -34,6 +36,7 @@ public class Game {
     private boolean moveX = false;
     private ArrayList<Character> directions = new ArrayList<>();
     private ArrayList<Rectangle2D> temporarySnakeSaver = new ArrayList<>();
+
 
     private long start = 0;
     private long end = 0;
@@ -106,7 +109,7 @@ public class Game {
                 GameBoardPanel.getInstance().setSnake(snake.getSnake());
                 if (checkCollision())
                     reset();
-                Thread.sleep(speed);
+                Thread.sleep(configs.getSpeed());
             }
         }
     }
@@ -275,12 +278,7 @@ public class Game {
     }
 
     public void switchAiControlled() {
-        if (aiControlled) {
-            aiControlled = false;
-        } else {
-            aiControlled = true;
-        }
+        aiControlled = !aiControlled;
     }
-
 
 }

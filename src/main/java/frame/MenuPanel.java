@@ -78,8 +78,13 @@ public class MenuPanel extends JPanel {
         JButton settingsButton = new JButton("Settings");
         settingsPanel.add(settingsButton);
         settingsButton.addActionListener(l -> {
-            ConfigFrame.getInstance();
-            System.out.println("pressed");
+            try {
+                ConfigFrame.getInstance();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            SnakeFrame.getInstance().setEnabled(false);
+
         });
 
         /* Area  and logic for the Stats Button*/
@@ -120,6 +125,8 @@ public class MenuPanel extends JPanel {
         }
     }
 
+    /* if a AI controlled game has started, the option to start another game while the current on
+    *  is still running is disabled */
     public void enableAiButton() {
         aiButton.setEnabled(true);
         SnakeFrame.getInstance().requestFocus();

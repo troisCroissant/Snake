@@ -112,7 +112,7 @@ public class MenuPanel extends JPanel {
     /* Before starting a new game, the program has to check wether the game is started by pressing the start button or
     *  by just pressing a direction. First case -> the start button is alread disabled; Second case -> the start button is enabled
     *  and has to be diabled manually. */
-    public boolean checkStartButtonStatus() {
+    public boolean isStartButtonEnabled() {
         return startButton.isEnabled();
     }
 

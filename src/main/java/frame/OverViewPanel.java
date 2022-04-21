@@ -9,7 +9,8 @@ public class OverViewPanel extends JPanel {
 	private JLabel currentScoreLabel;
 	private JLabel highScoreLabel;
 	private JLabel timePlayedLabel;
-
+	private JLabel speedLabel;
+   private int speedLevel = 5;
 	public static OverViewPanel getInstance() {
 		if (OverViewPanel.overViewPanel == null)
 			overViewPanel = new OverViewPanel();
@@ -29,7 +30,7 @@ public class OverViewPanel extends JPanel {
 		JLabel currentPlaceLabel = new JLabel("Current Place:  1");
 		add(currentPlaceLabel);
 
-		JLabel speedLabel = new JLabel("Speed (0-10):   1");
+		 speedLabel = new JLabel("Speed:   normal");
 		add(speedLabel);
 
 		timePlayedLabel = new JLabel("Time played:    0");
@@ -49,6 +50,23 @@ public class OverViewPanel extends JPanel {
 		int lastHighscore = Integer.parseInt(label[label.length - 1]);
 		if (highScore > lastHighscore) {
 			highScoreLabel.setText("HighScore:     " + highScore);
+		}
+	}
+
+	public void setSpeedLabel(int direction){
+		System.out.println("speedlevel = " + speedLevel);
+		if( (1  < speedLevel || (speedLevel == 1&&  direction > 0 )) &&  (speedLevel < 9 || (speedLevel == 9 &&  direction < 0 )) )
+		speedLevel += direction;
+		if (speedLevel < 3){
+			speedLabel.setText("Speed:   VERY SLOW");
+		} else if (speedLevel < 5){
+			speedLabel.setText("Speed:   SLOW");
+		} else if (speedLevel <6){
+			speedLabel.setText("Speed:   NORMAL");
+		} else if (speedLevel <8){
+			speedLabel.setText("Speed:   FAST");
+		} else {
+			speedLabel.setText("Speed:  VERY FAST");
 		}
 	}
 

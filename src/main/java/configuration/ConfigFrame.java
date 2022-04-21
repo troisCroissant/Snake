@@ -33,6 +33,9 @@ public class ConfigFrame extends JFrame {
                 configFrame = null;
                 SnakeFrame.getInstance().setEnabled(true);
                 MenuPanel.getInstance().setEnabled(true);
+                MenuPanel.getInstance().enableAiButton();
+                MenuPanel.getInstance().enableStartButton();
+                SnakeFrame.getInstance().setEnabled(true);
                 SnakeFrame.getInstance().requestFocus();
 
             }

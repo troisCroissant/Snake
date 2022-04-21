@@ -83,7 +83,7 @@ public class MenuPanel extends JPanel {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            SnakeFrame.getInstance().setEnabled(false);
+
 
         });
 

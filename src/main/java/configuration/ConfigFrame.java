@@ -1,6 +1,7 @@
 package src.main.java.configuration;
 
 
+import src.main.java.frame.MenuPanel;
 import src.main.java.frame.SnakeFrame;
 import src.main.java.logic.Game;
 
@@ -31,6 +32,7 @@ public class ConfigFrame extends JFrame {
                 configFrame.dispose();
                 configFrame = null;
                 SnakeFrame.getInstance().setEnabled(true);
+                MenuPanel.getInstance().setEnabled(true);
                 SnakeFrame.getInstance().requestFocus();
 
             }

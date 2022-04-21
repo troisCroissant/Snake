@@ -77,12 +77,26 @@ public class Game {
         gameThread.start();
     }
 
+
     public void startGame() throws InterruptedException {
         start = System.currentTimeMillis();
         if (aiControlled) {
-            generateDirectionsForAI();
+            for(int i  = 0 ; i< 12; i++){
+            directions.add('l');
+                directions.add('u');
+            }
+            char savePriorDirection = directions.get(directions.size()-2);
+
             while (gameRunning) {
-                System.out.println(directions.size() + ", "+  directions.get(0));
+                if (directions.size() != 0 ){
+                    System.out.println("Size: " + directions.size()+", direction: " + directions.get(0));
+                    savePriorDirection = directions.get(directions.size()-1);
+                }
+
+                if(directions.size() == 0 ) {
+
+                    generateDirectionsForAI(savePriorDirection);
+                }
                 gameboard.setSnake(snake.getSnake());
                 directionChangeBlocked = false;
                 expandSnakeWhenEndOfSnakeReachedItem();
@@ -93,9 +107,6 @@ public class Game {
                     generateItem();
                     overview.setScore(++score);
 
-                    System.out.println(directions.size() );
-
-                    generateDirectionsForAI();
                 }
                 if (checkCollision(snake.getSnake())  ||  !aiControlled) {
                     reset();
@@ -159,61 +170,21 @@ public class Game {
         return false;
     }
 
-    private void generateDirectionsForAI() {
-        if (temporarySnakeSaver.size() != 0) temporarySnakeSaver.clear();
-        for(int i = 0 ; i<snake.getSnake().size(); i++){
-            temporarySnakeSaver.add(new Rectangle((int)snake.getSnake().get(i).getX(),(int) snake.getSnake().get(i).getY(),
-                    20, 20));
-        }
-        while( !snakeHeadReachedItem(temporarySnakeSaver)){
-
-            int deltaX = -1 * ((item.x - 1) - (int) temporarySnakeSaver.get(0).getX()) / 20;
-            int deltaY = (item.y-1 - (int) temporarySnakeSaver.get(0).getY()) / 20;
-            if(deltaX < 0 ){
-                directions.add('r');
-                moveSnake(temporarySnakeSaver, directions.get(directions.size()-1));
-                if (checkCollision(temporarySnakeSaver)){
-                    System.out.println("collision incoming r");
-                }
-            } else if (deltaX > 0){
-                directions.add('l');
-                moveSnake(temporarySnakeSaver, directions.get(directions.size()-1));
-                if (checkCollision(temporarySnakeSaver)){
-                    System.out.println("collision incoming l");
-                }
-            } else if (deltaY < 0 ){
-                directions.add('u');
-                moveSnake(temporarySnakeSaver, directions.get(directions.size()-1));
-                if (checkCollision(temporarySnakeSaver)){
-                    System.out.println("collision incoming u");
-                }
-            } else{
-                directions.add('d');
-                moveSnake(temporarySnakeSaver, directions.get(directions.size()-1));
-                if (checkCollision(temporarySnakeSaver)){
-                    System.out.println("collision incoming d");
-                }
+    private void generateDirectionsForAI(char PriorDirection) {
+           char futureDirection = switch (PriorDirection) {
+               case 'u' -> 'r';
+               case 'r' -> 'd';
+               case 'd' -> 'l';
+               case 'l' -> 'u';
+               default -> ' ';
+           };
+        System.out.println("futuredirection: " + futureDirection);
+        for (int i = 0 ; i < 24; i++){
+                directions.add(futureDirection);
             }
-        }
     }
 
     private void moveSnake(ArrayList<Rectangle2D> snakeList, char direction) {
-        /* When the snake moves, every rectangle takes the position of the rectangle on position above*/
-        for (int i = snakeList.size() - 1; i > 0; i--) {
-            snakeList.get(i).setRect(snakeList.get(i - 1).getX(), snakeList.get(i - 1).getY(), 20,
-                    20);
-        }
-        /*After every rectangle is set, the new position of the snakehead has to be determined by checking the position*/
-        switch (direction) {
-            case 'u' -> snakeList.get(0).setRect(snakeList.get(0).getX(), snakeList.get(0).getY() - 20, 20, 20);
-            case 'd' -> snakeList.get(0).setRect(snakeList.get(0).getX(), snakeList.get(0).getY() + 20, 20, 20);
-            case 'l' -> snakeList.get(0).setRect(snakeList.get(0).getX() - 20, snakeList.get(0).getY(), 20, 20);
-            case 'r' -> snakeList.get(0).setRect(snakeList.get(0).getX() + 20, snakeList.get(0).getY(), 20, 20);
-        }
-
-    }
-
-    private void moveSnakeBackWards(ArrayList<Rectangle2D> snakeList, char direction) {
         /* When the snake moves, every rectangle takes the position of the rectangle on position above*/
         for (int i = snakeList.size() - 1; i > 0; i--) {
             snakeList.get(i).setRect(snakeList.get(i - 1).getX(), snakeList.get(i - 1).getY(), 20,

@@ -29,7 +29,7 @@ public class SnakeFrame extends JFrame {
 
 		contentPane.add(OverViewPanel.getInstance(), BorderLayout.NORTH);
 		contentPane.add(GameBoardPanel.getInstance(), BorderLayout.CENTER);
-		contentPane.add(MenuePanel.getInstance(), BorderLayout.SOUTH);
+		contentPane.add(MenuPanel.getInstance(), BorderLayout.SOUTH);
 
 		requestFocus();
 		addKeyListener(new Keys());

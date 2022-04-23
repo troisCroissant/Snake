@@ -44,10 +44,8 @@ public class GameBoardPanel extends JPanel {
 		}
 
 		if (snake.size() != 0) {
-			g2d.setColor(colorMap.get("snake_head"));
-			g2d.fill(snake.get(0));
-			g2d.setColor(colorMap.get("snake_tail"));
-			for (int i = 1; i < snake.size(); i++) {
+			g2d.setColor(colorMap.get("snake"));
+			for (int i = 0; i < snake.size(); i++) {
 				g2d.fill(snake.get(i));
 			}
 				g2d.setColor(colorMap.get("item_normal"));
@@ -69,10 +67,9 @@ public class GameBoardPanel extends JPanel {
 	}
 
 	private void initilalizeColorMap(Map<String, Color> m) {
-		m.put("snake_tail", new Color(196, 117, 39));
-		m.put("snake_head", new Color(46,0,235));
+		m.put("snake", new Color(0, 0, 0));
 		m.put("item_normal", new Color(255,0,0));
-		m.put("background", new Color(225, 220, 219));
-		m.put("game_lines", new Color(176,178,184));
+		m.put("background", new Color(255, 255, 255));
+		m.put("game_lines", new Color(240, 240, 240));
 	}
 }
